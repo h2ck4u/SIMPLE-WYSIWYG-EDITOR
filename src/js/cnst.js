@@ -17,7 +17,13 @@ const cnst = {
         }
     ],
     DEFAULT_POPUP_MARGIN_BOTTOM: 30,
-    DEFAULT_POPUP_WIDTH: 85
+    DEFAULT_POPUP_WIDTH: 85,
+    COMMAND_NAME: {
+        BOLD: 'bold',
+        ITALIC: 'italic',
+        STRIKETHROUGH: 'strikethrough',
+        UNDERLINE: 'underline',
+    }
 }
 
 export default cnst;
