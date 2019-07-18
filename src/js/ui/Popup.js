@@ -30,6 +30,18 @@ class Popup {
     }
 
     /**
+     * popup의 위치를 셋팅합니다.
+     * @param {Number} top 
+     * @param {Number} left 
+     */
+    setPosition(top, left) {
+        this.$element.css({
+            top: top,
+            left: left
+        });
+    }
+
+    /**
      * popup을 보여줍니다.
      */
     show() {
