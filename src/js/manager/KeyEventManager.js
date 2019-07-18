@@ -4,7 +4,7 @@ class KeyEventManager {
     constructor(editorId, editor) {
         this.editor = editor;
         this.editorId = editorId;
-        this.maxTextCount = 10;
+        this.maxTextCount = editor.config["MAX_TEXT_COUNT"];
         this.writeable = true;
 
         this.attachEvent();

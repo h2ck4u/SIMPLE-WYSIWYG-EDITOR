@@ -9,8 +9,9 @@ const {
     BUTTONS
 } = cnst;
 class Editor {
-    constructor(editorId) {
+    constructor(editorId, config) {
         this.editorId = editorId;
+        this.config = config;
         this.init(editorId);
 
         this.SelectionManager = new SelectionManager(editorId);
