@@ -1,3 +1,4 @@
+import Popup from './js/ui/Popup';
 import './css/editor.css';
 class Editor {
     constructor(editorId) {
@@ -18,6 +19,8 @@ class Editor {
         const $editableDiv = $(`<div class="editor-main" contenteditable="true"></div>`);
         $container.append($editableDiv);
         $editor.append($container);
+
+        this.popup = new Popup(editorId, []);
     }
 }
 
