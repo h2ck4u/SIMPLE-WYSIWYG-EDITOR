@@ -2,6 +2,11 @@ import Popup from './js/ui/Popup';
 import SelectionManager from './js/manager/SelectionManager';
 import MouseEventManager from './js/manager/MouseEventManager';
 import './css/editor.css';
+
+import cnst from './js/cnst';
+const {
+    BUTTONS
+} = cnst;
 class Editor {
     constructor(editorId) {
         this.editorId = editorId;
@@ -25,7 +30,7 @@ class Editor {
         $container.append($editableDiv);
         $editor.append($container);
 
-        this.popup = new Popup(editorId, []);
+        this.popup = new Popup(editorId, BUTTONS);
     }
 }
 
