@@ -7,3 +7,15 @@
     word-wrap: break-word;
     overflow-y: scroll;
 }
+
+.comment-container .hide {
+    display: none;
+}
+
+.comment-container .popup {
+    width: 85px;
+    height: 25px;
+    border: solid 0.5px gray;
+    background: white;
+    position: absolute;
+}

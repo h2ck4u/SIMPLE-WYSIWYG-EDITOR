@@ -13,10 +13,26 @@ class Popup {
      */
     createElement() {
         const $editor = $(`#${this.editorId} .comment-container`);
-        const $element = $(`<div class="popup"></div>`);
+        const $element = $(`<div class="popup hide"></div>`);
 
         $editor.append($element);
         return $element;
+    }
+
+     /**
+     * popup을 보여줍니다.
+     */
+    show() {
+        this.$element.removeClass('hide');
+    }
+
+     /**
+     * popup을 숨깁니다.
+     */
+    hide() {
+        if (!this.$element.hasClass('hide')) {
+            this.$element.addClass('hide');
+        }
     }
 }
 
