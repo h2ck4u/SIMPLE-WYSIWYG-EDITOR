@@ -1,9 +1,12 @@
 import Popup from './js/ui/Popup';
+import MouseEventManager from './js/manager/MouseEventManager';
 import './css/editor.css';
 class Editor {
     constructor(editorId) {
         this.editorId = editorId;
         this.init(editorId);
+
+        this.MouseEventManager = new MouseEventManager(editorId, this);
 
         return this;
     }
