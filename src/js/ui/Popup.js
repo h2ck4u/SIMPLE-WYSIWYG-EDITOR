@@ -50,6 +50,11 @@ class Popup {
         const position = util.getPopupPosition();
 
         this.setPosition(position.top, position.left);
+        const style = util.mergeStyle(this.editorId);
+        this.buttons.forEach(button => {
+            let buttonName = button.name;
+            button.setStatus(style[buttonName]);
+        });
         this.$element.removeClass('hide');
     }
 
