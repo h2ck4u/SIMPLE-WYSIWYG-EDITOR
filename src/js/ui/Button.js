@@ -33,6 +33,19 @@ class Button {
             this.$element.removeClass('active');
         }
     }
+
+    /**
+     * 상태를 셋팅합니다.
+     * @returns {boolean} status
+     */
+    setStatus(status) {
+        this.status = status;
+        if (!status) {
+            this.$element.removeClass('active');
+        } else {
+            this.$element.addClass('active');
+        }
+    }
 }
 
 export default Button;
