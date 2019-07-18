@@ -16,7 +16,7 @@ const util = {
         const boundingRect = range.getClientRects()[0];
         return {
             top: boundingRect.top - DEFAULT_POPUP_MARGIN_BOTTOM,
-            bottom: boundingRect.left + boundingRect.width / 2 - DEFAULT_POPUP_WIDTH / 2
+            left: boundingRect.left + boundingRect.width / 2 - DEFAULT_POPUP_WIDTH / 2
         };
     }
 }
