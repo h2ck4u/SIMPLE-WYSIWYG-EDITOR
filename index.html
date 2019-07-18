@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Comment Editor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script src="./dist/editor.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='./src/css/editor.css'>
+</head>
+
+<body onload="createEditor();">
+  <div id="editor"></div>
+  <script>
+    function createEditor() {
+      window.editor = new Editor('editor');
+    }
+  </script>
+</body>
+
+</html>
