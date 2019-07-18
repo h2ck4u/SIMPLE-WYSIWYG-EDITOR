@@ -1,3 +1,5 @@
+import command from '../command/command';
+
 class MouseEventManager {
     constructor(editorId, editor) {
         this.editorId = editorId;
@@ -56,10 +58,11 @@ class MouseEventManager {
             let $button = button.getElement();
             $button.on('mousedown', (e) => {
                 e.stopPropagation();
-                const targetName = e.target.getAttribute('name');
-                if (!!targetName) {
+                const buttonName = e.target.getAttribute('name');
+                if (!!buttonName) {
                     e.preventDefault();
                     e.stopPropagation();
+                    command[buttonName]();
                     button.toggelStatus();
                 }
             });
