@@ -18,6 +18,16 @@ const util = {
             top: boundingRect.top - DEFAULT_POPUP_MARGIN_BOTTOM,
             left: boundingRect.left + boundingRect.width / 2 - DEFAULT_POPUP_WIDTH / 2
         };
+    },
+
+    /**
+     * 에디터 영역내의 텍스트갯수를 셉니다. 엔터는 1글자로 처리합니다.
+     */
+    countText: function (editorId) {
+        const elEditor = $(`#${editorId} .editor-main`);
+        const children = elEditor.children();
+        const newLine = children.length === 0 ? 0 : children.length - 1;
+        return newLine + elEditor.text().length;
     }
 }
 

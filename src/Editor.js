@@ -1,4 +1,5 @@
 import Popup from './js/ui/Popup';
+import KeyEventManager from './js/manager/KeyEventManager';
 import SelectionManager from './js/manager/SelectionManager';
 import MouseEventManager from './js/manager/MouseEventManager';
 import './css/editor.css';
@@ -8,11 +9,13 @@ const {
     BUTTONS
 } = cnst;
 class Editor {
-    constructor(editorId) {
+    constructor(editorId, config) {
         this.editorId = editorId;
+        this.config = config;
         this.init(editorId);
 
         this.SelectionManager = new SelectionManager(editorId);
+        this.KeyEventManager = new KeyEventManager(editorId, this);
         this.MouseEventManager = new MouseEventManager(editorId, this);
 
         return this;
