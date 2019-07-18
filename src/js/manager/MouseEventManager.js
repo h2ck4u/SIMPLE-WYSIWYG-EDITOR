@@ -3,7 +3,7 @@ class MouseEventManager {
         this.editorId = editorId;
         this.editor = editor;
         this.popup = editor.popup;
-        this.selectionManager = editor.selectionManager;
+        this.SelectionManager = editor.SelectionManager;
 
         this.attachEvent();
     }
@@ -22,7 +22,10 @@ class MouseEventManager {
     mouseDownOnEditor() {
         const elEditor = $(`#${this.editorId}`);
         elEditor.on('mousedown', () => {
-            this.popup.hide();
+            const isCollpased = this.SelectionManager.isCollapsed();
+            if (isCollpased) {
+                this.popup.hide();
+            }
         });
     }
 
@@ -32,8 +35,15 @@ class MouseEventManager {
     mouseUpOnEditor() {
         const elEditor = $(`#${this.editorId}`);
         elEditor.on('mouseup', () => {
-            this.popup.show();
-        })
+            setTimeout(() => {
+                const isCollpased = this.SelectionManager.isCollapsed();
+                if (isCollpased) {
+                    this.popup.hide();
+                } else {
+                    this.popup.show();
+                }
+            }, 0);
+        });
     }
 }
 
