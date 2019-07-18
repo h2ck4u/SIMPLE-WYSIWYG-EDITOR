@@ -1,4 +1,5 @@
 import Popup from './js/ui/Popup';
+import SelectionManager from './js/manager/SelectionManager';
 import MouseEventManager from './js/manager/MouseEventManager';
 import './css/editor.css';
 class Editor {
@@ -6,6 +7,7 @@ class Editor {
         this.editorId = editorId;
         this.init(editorId);
 
+        this.SelectionManager = new SelectionManager(editorId);
         this.MouseEventManager = new MouseEventManager(editorId, this);
 
         return this;
