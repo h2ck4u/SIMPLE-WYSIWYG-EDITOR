@@ -21,6 +21,18 @@ class Button {
     getElement() {
         return this.$element;
     }
+
+    /**
+     * 상태를 토글합니다.
+     */
+    toggelStatus() {
+        this.status = !this.status;
+        if (this.status) {
+            this.$element.addClass('active');
+        } else {
+            this.$element.removeClass('active');
+        }
+    }
 }
 
 export default Button;
