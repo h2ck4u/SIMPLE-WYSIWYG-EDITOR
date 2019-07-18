@@ -19,3 +19,14 @@
     background: white;
     position: absolute;
 }
+
+.comment-container i {
+    font-size: 16px;
+    padding: 2px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.comment-container i.active {
+    background: #00c73c;
+}
