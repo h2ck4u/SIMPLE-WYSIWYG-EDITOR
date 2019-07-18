@@ -1,0 +1,9 @@
+.comment-container .editor-main {
+    width: 400px;
+    height: 200px;
+    padding: 25px;
+    border: solid 1px gray;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}

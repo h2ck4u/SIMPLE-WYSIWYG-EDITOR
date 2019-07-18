@@ -1,0 +1,47 @@
+{
+  "name": "editorinterview",
+  "version": "1.0.0",
+  "description": "WYSIWYG Editor",
+  "main": "Editor.js",
+  "scripts": {
+    "build": "webpack -d --mode development",
+    "build-prod": "webpack -p --mode production",
+    "test": "./node_modules/.bin/mocha -r babel-register --recursive ./test/js/**/*.spec.js",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h2ck4u/editorinterview.git"
+  },
+  "keywords": [
+    "WYSIWYG",
+    "Editor",
+    "Editor"
+  ],
+  "author": "Jeungeuny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/h2ck4u/editorinterview/issues"
+  },
+  "homepage": "https://github.com/h2ck4u/editorinterview#readme",
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "css-loader": "^3.0.0",
+    "jquery": "^3.4.1",
+    "jsdom": "15.1.1",
+    "mocha": "^6.1.4",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
