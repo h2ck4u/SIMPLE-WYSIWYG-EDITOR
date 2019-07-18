@@ -1,4 +1,6 @@
 import Button from './Button';
+import util from '../util';
+
 
 class Popup {
     constructor(editorId, buttons) {
@@ -45,6 +47,9 @@ class Popup {
      * popup을 보여줍니다.
      */
     show() {
+        const position = util.getPopupPosition();
+
+        this.setPosition(position.top, position.left);
         this.$element.removeClass('hide');
     }
 

@@ -15,7 +15,9 @@ const cnst = {
             name: 'strikethrough',
             label: 's'
         }
-    ]
+    ],
+    DEFAULT_POPUP_MARGIN_BOTTOM: 30,
+    DEFAULT_POPUP_WIDTH: 85
 }
 
 export default cnst;
