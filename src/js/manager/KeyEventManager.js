@@ -1,5 +1,7 @@
 import util from '../util';
+import messages from '../messages';
 
+const { MESSAGE_PASTE_TEXT_EXCEEDED } = messages;
 class KeyEventManager {
     constructor(editorId, editor) {
         this.editor = editor;
@@ -18,6 +20,7 @@ class KeyEventManager {
         $editor.on('input', this.input.bind(this));
         $editor.on('keydown', this.keyDown.bind(this));
         $editor.on('keyup', this.keyUp.bind(this));
+        $editor.on('paste', this.paste.bind(this));
     }
 
     /**
@@ -52,6 +55,26 @@ class KeyEventManager {
      */
     keyUp(e) {
         this.setWriteable();
+    }
+
+    /**
+    * paste이벤트를 컨트롤 합니다.
+    * @param {Event} e 
+    */
+    paste() {
+        let text = (event.clipboardData || window.clipboardData).getData('text');
+        if (util.countText(this.editorId) + text.length > this.maxTextCount) {
+            alert(MESSAGE_PASTE_TEXT_EXCEEDED.KO);
+            return false;
+        }
+        const sel = window.getSelection();
+        if (!sel.rangeCount) {
+            return false;
+        }
+        sel.deleteFromDocument();
+        sel.getRangeAt(0).insertNode(document.createTextNode(text));
+        sel.collapseToEnd();
+        event.preventDefault();
     }
 
     /**
