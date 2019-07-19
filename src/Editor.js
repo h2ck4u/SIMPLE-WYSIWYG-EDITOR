@@ -1,3 +1,4 @@
+import Nav from './js/ui/Nav';
 import Popup from './js/ui/Popup';
 import KeyEventManager from './js/manager/KeyEventManager';
 import SelectionManager from './js/manager/SelectionManager';
@@ -34,6 +35,7 @@ class Editor {
         $editor.append($container);
 
         this.popup = new Popup(editorId, BUTTONS);
+        this.nav = new Nav(editorId, [], this.config["MAX_TEXT_COUNT"]);
     }
 }
 
