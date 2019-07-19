@@ -1,3 +1,5 @@
+import Label from './Label';
+
 class Nav {
     constructor(editorId, labels, maxTextCount) {
         this.editorId = editorId;
@@ -13,6 +15,14 @@ class Nav {
     createElement(labels) {
         const $editor = $(`#${this.editorId} .comment-container`);
         const $element = $(`<div class="label"></div>`);
+
+        labels.forEach(label => {
+            label.text = label.name === 'maxCount' ? ` / ${this.maxTextCount}` : 0;
+            const labelComponent = new Label(label);
+            this.labels.push(labelComponent);
+            const $label = labelComponent.getElement();
+            $element.append($label);
+        });
 
         $editor.append($element);
         return $element;
