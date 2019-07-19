@@ -57,6 +57,10 @@ class KeyEventManager {
         this.setWriteable();
     }
 
+    /**
+    * paste이벤트를 컨트롤 합니다.
+    * @param {Event} e 
+    */
     paste() {
         let text = (event.clipboardData || window.clipboardData).getData('text');
         if (util.countText(this.editorId) + text.length > this.maxTextCount) {
@@ -72,6 +76,7 @@ class KeyEventManager {
         sel.collapseToEnd();
         event.preventDefault();
     }
+
     /**
      * 에디터 영역내의 텍스트 개수를 가져와 MaxTextCount와 비교하여 writeable flag를 관리합니다.
      */
