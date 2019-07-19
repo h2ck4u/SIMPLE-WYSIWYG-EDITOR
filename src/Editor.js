@@ -7,7 +7,7 @@ import './css/editor.css';
 
 import cnst from './js/cnst';
 const {
-    BUTTONS
+    BUTTONS, NAV_LABEL
 } = cnst;
 class Editor {
     constructor(editorId, config) {
@@ -35,7 +35,7 @@ class Editor {
         $editor.append($container);
 
         this.popup = new Popup(editorId, BUTTONS);
-        this.nav = new Nav(editorId, [], this.config["MAX_TEXT_COUNT"]);
+        this.nav = new Nav(editorId, NAV_LABEL, this.config["MAX_TEXT_COUNT"]);
     }
 }
 
