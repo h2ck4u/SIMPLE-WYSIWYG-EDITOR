@@ -18,6 +18,7 @@ class KeyEventManager {
         $editor.on('input', this.input.bind(this));
         $editor.on('keydown', this.keyDown.bind(this));
         $editor.on('keyup', this.keyUp.bind(this));
+        $editor.on('paste', this.paste.bind(this));
     }
 
     /**
@@ -54,6 +55,17 @@ class KeyEventManager {
         this.setWriteable();
     }
 
+    paste() {
+        let text = (event.clipboardData || window.clipboardData).getData('text');
+        const sel = window.getSelection();
+        if (!sel.rangeCount) {
+            return false;
+        }
+        sel.deleteFromDocument();
+        sel.getRangeAt(0).insertNode(document.createTextNode(text));
+        sel.collapseToEnd();
+        event.preventDefault();
+    }
     /**
      * 에디터 영역내의 텍스트 개수를 가져와 MaxTextCount와 비교하여 writeable flag를 관리합니다.
      */
