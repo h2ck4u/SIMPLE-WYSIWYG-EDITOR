@@ -3,7 +3,6 @@ import Popup from './js/ui/Popup';
 import KeyEventManager from './js/manager/KeyEventManager';
 import SelectionManager from './js/manager/SelectionManager';
 import MouseEventManager from './js/manager/MouseEventManager';
-import './css/editor.css';
 
 import cnst from './js/cnst';
 const {
