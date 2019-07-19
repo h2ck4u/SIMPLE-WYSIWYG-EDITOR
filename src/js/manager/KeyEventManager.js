@@ -1,5 +1,7 @@
 import util from '../util';
+import messages from '../messages';
 
+const { MESSAGE_PASTE_TEXT_EXCEEDED } = messages;
 class KeyEventManager {
     constructor(editorId, editor) {
         this.editor = editor;
@@ -57,6 +59,10 @@ class KeyEventManager {
 
     paste() {
         let text = (event.clipboardData || window.clipboardData).getData('text');
+        if (util.countText(this.editorId) + text.length > this.maxTextCount) {
+            alert(MESSAGE_PASTE_TEXT_EXCEEDED.KO);
+            return false;
+        }
         const sel = window.getSelection();
         if (!sel.rangeCount) {
             return false;
