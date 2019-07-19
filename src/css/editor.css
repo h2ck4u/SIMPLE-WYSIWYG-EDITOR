@@ -30,3 +30,11 @@
 .comment-container i.active {
     background: #00c73c;
 }
+
+.comment-container .label {
+    width: 400px;
+    height: 20px;
+    border: solid 0.5px gray;
+    border-top: none;
+    box-sizing: border-box;
+}
