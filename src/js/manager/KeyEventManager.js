@@ -9,6 +9,8 @@ class KeyEventManager {
         this.maxTextCount = editor.config["MAX_TEXT_COUNT"];
         this.writeable = true;
 
+        this.nav = editor.nav;
+
         this.attachEvent();
     }
 
@@ -81,7 +83,10 @@ class KeyEventManager {
      * 에디터 영역내의 텍스트 개수를 가져와 MaxTextCount와 비교하여 writeable flag를 관리합니다.
      */
     setWriteable() {
-        this.writeable = util.countText(this.editorId) < this.maxTextCount;
+        const countOfText = util.countText(this.editorId);
+        this.writeable = countOfText < this.maxTextCount;
+        const currCountLabel = this.nav.findLabel('currCount');
+        currCountLabel.updateText(countOfText);
     }
 }
 

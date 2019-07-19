@@ -21,6 +21,15 @@ class Label {
     getElement() {
         return this.$element;
     }
+
+    /**
+    * Label의 텍스트를 업데이트합니다.
+    * @param {String} text 
+    */
+    updateText(text) {
+        this.text = text;
+        this.$element.text(text);
+    }
 }
 
 export default Label;

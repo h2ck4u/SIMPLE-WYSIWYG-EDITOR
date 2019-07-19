@@ -34,6 +34,18 @@ class Nav {
     getElement() {
         return this.$element;
     }
+
+    /**
+     * 인자로 받은 name과 같은 label을 찾아 반환합니다.
+     * @param {String} name 
+     */
+    findLabel(name) {
+        for (let i = 0; i < this.labels.length - 1; i++) {
+            if (this.labels[i].name === name) {
+                return this.labels[i];
+            }
+        }
+    }
 }
 
 export default Nav;
