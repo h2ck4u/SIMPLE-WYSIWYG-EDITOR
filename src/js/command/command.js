@@ -16,6 +16,9 @@ const Action = {
     },
     [COMMAND_NAME.UNDERLINE]: function () {
         document.execCommand('underline');
+    },
+    [COMMAND_NAME.DELETE]: function () {
+        document.execCommand('delete');
     }
 }
 

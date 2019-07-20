@@ -1,7 +1,14 @@
 import util from '../util';
 import messages from '../messages';
+import command from '../command/command';
+import cnst from '../cnst';
 
-const { MESSAGE_PASTE_TEXT_EXCEEDED } = messages;
+const {
+    MESSAGE_PASTE_TEXT_EXCEEDED,
+} = messages;
+const {
+    COMMAND_NAME
+} = cnst;
 class KeyEventManager {
     constructor(editorId, editor) {
         this.editor = editor;
@@ -10,7 +17,6 @@ class KeyEventManager {
         this.writeable = true;
 
         this.nav = editor.nav;
-
         this.attachEvent();
     }
 
@@ -21,7 +27,7 @@ class KeyEventManager {
         const $editor = $(`#${this.editorId} .editor-main`);
         $editor.on('input', this.input.bind(this));
         $editor.on('keydown', this.keyDown.bind(this));
-        $editor.on('keyup', this.keyUp.bind(this));
+        $editor.on('keypress', this.keyPress.bind(this));
         $editor.on('paste', this.paste.bind(this));
     }
 
@@ -30,9 +36,22 @@ class KeyEventManager {
      * @param {Event} e 
      */
     input(e) {
-        if (this.writeable) {
-            this.setWriteable();
+        if (util.countText(this.editorId) > this.maxTextCount) {
+            command[COMMAND_NAME.DELETE]();
         }
+        this.updateTextLength();
+    }
+
+    /**
+     * keyDown이벤트를 컨트롤 합니다.
+     * @param {Event} e 
+     */
+    keyPress(e) {
+        if (util.countText(this.editorId) >= this.maxTextCount) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        this.updateTextLength();
     }
 
     /**
@@ -40,31 +59,18 @@ class KeyEventManager {
      * @param {Event} e 
      */
     keyDown(e) {
-        if (!this.writeable) {
-            const keyCode = e.keyCode;
-            const isNumber = 48 <= keyCode && keyCode <= 57;
-            const isAlpha = 65 <= keyCode && keyCode <= 90;
-            const isKeypad = 96 <= keyCode && keyCode <= 109;
-            if (!(e.ctrlKey || e.metaKey) && (isNumber || isAlpha || isKeypad)) {
-                return false;
-            }
+        if (util.countText(this.editorId) > this.maxTextCount) {
+            command[COMMAND_NAME.DELETE]();
         }
+        this.updateTextLength();
     }
 
     /**
-     * keyUp이벤트를 컨트롤 합니다.
+     * paste이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    keyUp(e) {
-        this.setWriteable();
-    }
-
-    /**
-    * paste이벤트를 컨트롤 합니다.
-    * @param {Event} e 
-    */
-    paste() {
-        let text = (event.clipboardData || window.clipboardData).getData('text');
+    paste(e) {
+        let text = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
         if (util.countText(this.editorId) + text.length > this.maxTextCount) {
             alert(MESSAGE_PASTE_TEXT_EXCEEDED.KO);
             return false;
@@ -76,17 +82,16 @@ class KeyEventManager {
         sel.deleteFromDocument();
         sel.getRangeAt(0).insertNode(document.createTextNode(text));
         sel.collapseToEnd();
-        event.preventDefault();
+        e.stopPropagation();
+        e.preventDefault();
     }
 
     /**
-     * 에디터 영역내의 텍스트 개수를 가져와 MaxTextCount와 비교하여 writeable flag를 관리합니다.
+     * 에디터 영역내의 텍스트 개수를 가져와 Label을 업데이트 합니다.
      */
-    setWriteable() {
-        const countOfText = util.countText(this.editorId);
-        this.writeable = countOfText < this.maxTextCount;
+    updateTextLength() {
         const currCountLabel = this.nav.findLabel('currCount');
-        currCountLabel.updateText(countOfText);
+        currCountLabel.updateText(util.countText(this.editorId));
     }
 }
 
