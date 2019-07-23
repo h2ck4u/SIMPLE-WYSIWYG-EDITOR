@@ -1,6 +1,6 @@
+import $ from 'jquery';
 import Button from './Button';
 import util from '../util';
-
 
 class Popup {
     constructor(editorId, buttons) {

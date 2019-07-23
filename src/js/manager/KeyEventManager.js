@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import util from '../util';
 import messages from '../messages';
 import command from '../command/command';

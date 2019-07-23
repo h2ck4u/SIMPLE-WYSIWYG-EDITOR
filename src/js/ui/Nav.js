@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Label from './Label';
 
 class Nav {
