@@ -11,9 +11,8 @@ const {
     COMMAND_NAME
 } = cnst;
 class KeyEventManager {
-    constructor(editorId, editor) {
+    constructor(editor) {
         this.editor = editor;
-        this.editorId = editorId;
         this.maxTextCount = editor.config["MAX_TEXT_COUNT"];
         this.writeable = true;
 
@@ -25,7 +24,7 @@ class KeyEventManager {
      * 이벤트매니저를 초기화 합니다.
      */
     attachEvent() {
-        const $editor = $(`#${this.editorId} .editor-main`);
+        const $editor = this.editor.getMainElement();
         $editor.on('input', this.input.bind(this));
         $editor.on('keydown', this.keyDown.bind(this));
         $editor.on('keypress', this.keyPress.bind(this));
@@ -37,7 +36,7 @@ class KeyEventManager {
      * @param {Event} e 
      */
     input(e) {
-        if (util.countText(this.editorId) > this.maxTextCount) {
+        if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
             command[COMMAND_NAME.DELETE]();
         }
         this.updateTextCount();
@@ -48,7 +47,7 @@ class KeyEventManager {
      * @param {Event} e 
      */
     keyPress(e) {
-        if (util.countText(this.editorId) >= this.maxTextCount) {
+        if (util.countText(this.editor.getMainElement()) >= this.maxTextCount) {
             e.preventDefault();
             e.stopPropagation();
         }
@@ -60,7 +59,7 @@ class KeyEventManager {
      * @param {Event} e 
      */
     keyDown(e) {
-        if (util.countText(this.editorId) > this.maxTextCount) {
+        if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
             command[COMMAND_NAME.DELETE]();
         }
         this.updateTextCount();
@@ -72,7 +71,7 @@ class KeyEventManager {
      */
     paste(e) {
         let text = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
-        if (util.countText(this.editorId) + text.length > this.maxTextCount) {
+        if (util.countText(this.editor.getMainElement()) + text.length > this.maxTextCount) {
             alert(MESSAGE_PASTE_TEXT_EXCEEDED.KO);
             return false;
         }
@@ -88,7 +87,7 @@ class KeyEventManager {
     }
 
     /**
-     * 현재 입력된 텍스트수를 업데이트 합니다.
+     * 현재 입력된 글자수를 업데이트 합니다.
      */
     updateTextCount() {
         this.nav.updateTextCount();

@@ -3,8 +3,8 @@ import Label from './Label';
 import util from '../util';
 
 class Nav {
-    constructor(editorId, labels, maxTextCount) {
-        this.editorId = editorId;
+    constructor(editor, labels, maxTextCount) {
+        this.editor = editor;
         this.labels = [];
         this.maxTextCount = maxTextCount
         this.$element = this.createElement(labels);
@@ -15,7 +15,7 @@ class Nav {
      * @returns {jQuery} navElement
      */
     createElement(labels) {
-        const $editor = $(`#${this.editorId} .comment-container`);
+        const $editor = this.editor.getContainerElement();
         const $element = $(`<div class="label"></div>`);
 
         labels.forEach(label => {
@@ -42,7 +42,7 @@ class Nav {
      */
     updateTextCount() {
         const currCountLabel = this.findLabel('currCount');
-        currCountLabel.updateText(util.countText(this.editorId));
+        currCountLabel.updateText(util.countText(this.editor.getMainElement()));
     }
 
     /**

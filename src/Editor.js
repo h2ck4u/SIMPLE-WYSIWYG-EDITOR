@@ -17,26 +17,59 @@ class Editor {
         this.init(editorId);
 
         this.SelectionManager = new SelectionManager(editorId);
-        this.KeyEventManager = new KeyEventManager(editorId, this);
+        this.KeyEventManager = new KeyEventManager(this);
         this.MouseEventManager = new MouseEventManager(editorId, this);
 
         return this;
     }
 
     /**
-     * 에디터 Element를 초기화합니다. 
-     * 팝업,네비바를 DOM에 생성하여 append합니다.
-     * @param {String} editorId 
+     * Editor Element를 생성합니다.
+     * @returns {jQuery} Editor
      */
-    init(editorId) {
-        const $editor = $(`#${editorId}`);
+    createElement() {
+        const $editor = $(`#${this.editorId}`);
         const $container = $($(`<div class="comment-container"></div>`));
         const $editableDiv = $(`<div class="editor-main" contenteditable="true"></div>`);
         $container.append($editableDiv);
         $editor.append($container);
 
-        this.popup = new Popup(editorId, BUTTONS);
-        this.nav = new Nav(editorId, NAV_LABEL, this.config["MAX_TEXT_COUNT"]);
+        return $editor;
+    }
+
+    /**
+     * Editor Element를 반환합니다.
+     * @returns {jQuery} Editor
+     */
+    getElement() {
+        return this.$element;
+    }
+
+    /**
+     * comment-container Element를 반환합니다.
+     * @returns {jQuery} comment-container
+     */
+    getContainerElement() {
+        return this.$element.find('.comment-container');
+    }
+
+    /**
+     * editor-main Element를 반환합니다.
+     * @returns {jQuery} editor-main
+     */
+    getMainElement() {
+        return this.$element.find('.editor-main');
+    }
+
+    /**
+     * 에디터 Element를 초기화합니다. 
+     * 팝업,네비바를 DOM에 생성하여 append합니다.
+     */
+    init() {
+        this.$element = this.createElement();
+
+        this.popup = new Popup(this, this.editorId, BUTTONS);
+        this.nav = new Nav(this, NAV_LABEL, this.config["MAX_TEXT_COUNT"]);
     }
 }
 

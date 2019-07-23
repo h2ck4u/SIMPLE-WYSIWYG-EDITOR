@@ -22,13 +22,13 @@ const util = {
     },
 
     /**
+     * @param {jQuery} $editorMain 
      * 에디터 영역내의 텍스트갯수를 셉니다. 엔터는 1글자로 처리합니다.
      */
-    countText: function (editorId) {
-        const elEditor = $(`#${editorId} .editor-main`);
-        const children = elEditor.children();
+    countText: function ($editorMain) {
+        const children = $editorMain.children();
         const newLine = children.length === 0 ? 0 : children.length - 1;
-        return newLine + elEditor.text().length;
+        return newLine + $editorMain.text().length;
     },
 
     /**
