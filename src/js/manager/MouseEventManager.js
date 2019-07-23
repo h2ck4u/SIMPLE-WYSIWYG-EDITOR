@@ -57,7 +57,6 @@ class MouseEventManager {
         this.popup.buttons.forEach(button => {
             let $button = button.getElement();
             $button.on('mousedown', (e) => {
-                e.stopPropagation();
                 const buttonName = e.target.getAttribute('name');
                 if (!!buttonName) {
                     e.preventDefault();
