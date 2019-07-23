@@ -14,13 +14,24 @@ class Editor {
     constructor(editorId, config) {
         this.editorId = editorId;
         this.config = config;
-        this.init(editorId);
 
         this.selectionManager = new SelectionManager(editorId);
+        this.init(editorId);
         this.keyEventManager = new KeyEventManager(this);
         this.mouseEventManager = new MouseEventManager(editorId, this);
 
         return this;
+    }
+
+    /**
+     * 에디터 Element를 초기화합니다. 
+     * 팝업,네비바를 DOM에 생성하여 append합니다.
+     */
+    init() {
+        this.$element = this.createElement();
+
+        this.popup = new Popup(this, this.editorId, BUTTONS);
+        this.nav = new Nav(this, NAV_LABEL, this.config["MAX_TEXT_COUNT"]);
     }
 
     /**
@@ -59,17 +70,6 @@ class Editor {
      */
     getMainElement() {
         return this.$element.find('.editor-main');
-    }
-
-    /**
-     * 에디터 Element를 초기화합니다. 
-     * 팝업,네비바를 DOM에 생성하여 append합니다.
-     */
-    init() {
-        this.$element = this.createElement();
-
-        this.popup = new Popup(this, this.editorId, BUTTONS);
-        this.nav = new Nav(this, NAV_LABEL, this.config["MAX_TEXT_COUNT"]);
     }
 }
 
