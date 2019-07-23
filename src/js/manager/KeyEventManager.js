@@ -40,7 +40,7 @@ class KeyEventManager {
         if (util.countText(this.editorId) > this.maxTextCount) {
             command[COMMAND_NAME.DELETE]();
         }
-        this.updateTextLength();
+        this.updateTextCount();
     }
 
     /**
@@ -52,7 +52,7 @@ class KeyEventManager {
             e.preventDefault();
             e.stopPropagation();
         }
-        this.updateTextLength();
+        this.updateTextCount();
     }
 
     /**
@@ -63,7 +63,7 @@ class KeyEventManager {
         if (util.countText(this.editorId) > this.maxTextCount) {
             command[COMMAND_NAME.DELETE]();
         }
-        this.updateTextLength();
+        this.updateTextCount();
     }
 
     /**
@@ -88,11 +88,10 @@ class KeyEventManager {
     }
 
     /**
-     * 에디터 영역내의 텍스트 개수를 가져와 Label을 업데이트 합니다.
+     * 현재 입력된 텍스트수를 업데이트 합니다.
      */
-    updateTextLength() {
-        const currCountLabel = this.nav.findLabel('currCount');
-        currCountLabel.updateText(util.countText(this.editorId));
+    updateTextCount() {
+        this.nav.updateTextCount();
     }
 }
 
