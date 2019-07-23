@@ -7,8 +7,6 @@ class Popup {
         this.editor = editor;
         this.editorId = editorId;
         this.selectionManager = editor.selectionManager;
-        this.top = 0;
-        this.left = 0;
         this.buttons = [];
         this.$element = this.createElement(buttons);
     }
