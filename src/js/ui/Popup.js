@@ -6,6 +6,7 @@ class Popup {
     constructor(editor, editorId, buttons) {
         this.editor = editor;
         this.editorId = editorId;
+        this.selectionManager = editor.selectionManager;
         this.top = 0;
         this.left = 0;
         this.buttons = [];
@@ -48,7 +49,7 @@ class Popup {
      * popup을 보여줍니다.
      */
     show() {
-        const position = util.getPopupPosition();
+        const position = util.getPopupPosition(this.selectionManager.getRange());
 
         this.setPosition(position.top, position.left);
         const style = util.mergeStyle(this.editorId);

@@ -13,6 +13,7 @@ const {
 class KeyEventManager {
     constructor(editor) {
         this.editor = editor;
+        this.selectionManager = editor.selectionManager;
         this.maxTextCount = editor.config["MAX_TEXT_COUNT"];
         this.writeable = true;
 
@@ -75,13 +76,9 @@ class KeyEventManager {
             alert(MESSAGE_PASTE_TEXT_EXCEEDED.KO);
             return false;
         }
-        const sel = window.getSelection();
-        if (!sel.rangeCount) {
-            return false;
-        }
-        sel.deleteFromDocument();
-        sel.getRangeAt(0).insertNode(document.createTextNode(text));
-        sel.collapseToEnd();
+
+        this.selectionManager.insertNode(text);
+
         e.stopPropagation();
         e.preventDefault();
     }
