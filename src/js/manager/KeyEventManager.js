@@ -44,7 +44,7 @@ class KeyEventManager {
     }
 
     /**
-     * keyDown이벤트를 컨트롤 합니다.
+     * keyPress이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
     keyPress(e) {
