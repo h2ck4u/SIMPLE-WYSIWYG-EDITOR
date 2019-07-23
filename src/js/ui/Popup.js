@@ -3,7 +3,8 @@ import Button from './Button';
 import util from '../util';
 
 class Popup {
-    constructor(editorId, buttons) {
+    constructor(editor, editorId, buttons) {
+        this.editor = editor;
         this.editorId = editorId;
         this.top = 0;
         this.left = 0;
@@ -17,7 +18,7 @@ class Popup {
      * @returns {jQuery} popupElement
      */
     createElement(buttons) {
-        const $editor = $(`#${this.editorId} .comment-container`);
+        const $editor = this.editor.getContainerElement();
         const $element = $(`<div class="popup hide"></div>`);
 
         buttons.forEach(button => {
