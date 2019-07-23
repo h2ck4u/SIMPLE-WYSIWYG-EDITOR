@@ -4,7 +4,7 @@ class Button {
     constructor(button) {
         this.name = button.name;
         this.label = button.label;
-        this.status = false;
+        this.active = false;
         this.$element = this.createElement();
     }
 
@@ -25,27 +25,15 @@ class Button {
     }
 
     /**
-     * 상태를 토글합니다.
+     * @param {Bollean || undefined} bActive 
+     * 버튼컴포넌트의 상태를 변경하고, 활성하가 필요할경우에 active클래스를 추가하고, 그렇지 않을경우 제거합니다.
      */
-    toggelStatus() {
-        this.status = !this.status;
-        if (this.status) {
+    setActive(bActive = !this.active) {
+        this.active = bActive;
+        if (bActive) {
             this.$element.addClass('active');
         } else {
             this.$element.removeClass('active');
-        }
-    }
-
-    /**
-     * 상태를 셋팅합니다.
-     * @returns {boolean} status
-     */
-    setStatus(status) {
-        this.status = status;
-        if (!status) {
-            this.$element.removeClass('active');
-        } else {
-            this.$element.addClass('active');
         }
     }
 }

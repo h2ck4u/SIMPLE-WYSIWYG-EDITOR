@@ -62,7 +62,7 @@ class MouseEventManager {
                     e.preventDefault();
                     e.stopPropagation();
                     command[buttonName]();
-                    button.toggelStatus();
+                    button.setActive();
                 }
             });
         });
