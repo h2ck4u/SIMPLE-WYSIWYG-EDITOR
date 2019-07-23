@@ -2,17 +2,17 @@ import $ from 'jquery';
 
 class Label {
     constructor(label) {
-        this.name = label.name;
-        this.text = label.text;
-        this.$element = this.createElement();
+        this.$element = this.createElement(label.name, label.text);
     }
 
     /**
      * Label Element를 생성합니다.
+     * @param {String} name 
+     * @param {String} text 
      * @returns {jQuery} buttonElement
      */
-    createElement() {
-        const $element = $(`<label name="${this.name}">${this.text}</label>`);
+    createElement(name, text) {
+        const $element = $(`<label name="${name}">${text}</label>`);
         return $element;
     }
 
@@ -29,7 +29,6 @@ class Label {
      * @param {String} text 
      */
     updateText(text) {
-        this.text = text;
         this.$element.text(text);
     }
 }

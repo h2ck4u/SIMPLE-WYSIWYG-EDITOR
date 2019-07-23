@@ -51,7 +51,7 @@ class Nav {
      */
     findLabel(name) {
         for (let i = 0; i < this.labels.length - 1; i++) {
-            if (this.labels[i].name === name) {
+            if (this.labels[i].getElement().attr('name') === name) {
                 return this.labels[i];
             }
         }
