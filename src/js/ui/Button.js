@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 class Button {
     constructor(button) {
         this.name = button.name;

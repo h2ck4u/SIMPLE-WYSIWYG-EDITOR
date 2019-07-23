@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Nav from './js/ui/Nav';
 import Popup from './js/ui/Popup';
 import KeyEventManager from './js/manager/KeyEventManager';
@@ -6,7 +7,8 @@ import MouseEventManager from './js/manager/MouseEventManager';
 
 import cnst from './js/cnst';
 const {
-    BUTTONS, NAV_LABEL
+    BUTTONS,
+    NAV_LABEL
 } = cnst;
 class Editor {
     constructor(editorId, config) {
