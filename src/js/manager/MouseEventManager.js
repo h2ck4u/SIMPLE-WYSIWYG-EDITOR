@@ -6,7 +6,7 @@ class MouseEventManager {
         this.editorId = editorId;
         this.editor = editor;
         this.popup = editor.popup;
-        this.SelectionManager = editor.SelectionManager;
+        this.selectionManager = editor.selectionManager;
 
         this.attachEvent();
     }
@@ -27,7 +27,7 @@ class MouseEventManager {
      */
     mouseDownOnEditor($editor) {
         $editor.on('mousedown', () => {
-            const isCollpased = this.SelectionManager.isCollapsed();
+            const isCollpased = this.selectionManager.isCollapsed();
             if (isCollpased) {
                 this.popup.hide();
             }
@@ -40,7 +40,7 @@ class MouseEventManager {
     mouseUpOnEditor($editor) {
         $editor.on('mouseup', () => {
             setTimeout(() => {
-                const isCollpased = this.SelectionManager.isCollapsed();
+                const isCollpased = this.selectionManager.isCollapsed();
                 if (isCollpased) {
                     this.popup.hide();
                 } else {

@@ -9,11 +9,10 @@ const {
 const util = {
     /**
      * 현재 셀렉션을 계산하여 popup이 보여야할 위치를 반환합니다.
+     * @param {Range} range
      * @returns {Object} popupPosition
      */
-    getPopupPosition: function () {
-        const sel = window.getSelection();
-        const range = sel.getRangeAt(0);
+    getPopupPosition: function (range) {
         const boundingRect = range.getClientRects()[0];
         return {
             top: boundingRect.top - DEFAULT_POPUP_MARGIN_BOTTOM,

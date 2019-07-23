@@ -16,9 +16,9 @@ class Editor {
         this.config = config;
         this.init(editorId);
 
-        this.SelectionManager = new SelectionManager(editorId);
-        this.KeyEventManager = new KeyEventManager(this);
-        this.MouseEventManager = new MouseEventManager(editorId, this);
+        this.selectionManager = new SelectionManager(editorId);
+        this.keyEventManager = new KeyEventManager(this);
+        this.mouseEventManager = new MouseEventManager(editorId, this);
 
         return this;
     }
