@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import Nav from './js/ui/Nav';
 import Popup from './js/ui/Popup';
+import TextController from './js/controller/TextController';
+import UIController from './js/controller/UIController';
 import KeyEventManager from './js/manager/KeyEventManager';
 import SelectionManager from './js/manager/SelectionManager';
 import MouseEventManager from './js/manager/MouseEventManager';
@@ -15,8 +17,10 @@ class Editor {
         this.editorId = editorId;
         this.config = config;
 
-        this.selectionManager = new SelectionManager(editorId);
+        this.selectionManager = new SelectionManager();
+        this.textController = new TextController(this);
         this.init(editorId);
+        this.uiController = new UIController(this);
         this.keyEventManager = new KeyEventManager(this);
         this.mouseEventManager = new MouseEventManager(editorId, this);
 
