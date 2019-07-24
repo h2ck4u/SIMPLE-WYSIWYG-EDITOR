@@ -30,7 +30,7 @@ class KeyEventManager {
      */
     input(e) {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
-            this.textController.delete();
+            this.textController.execDelete();
         }
         this.uiController.updateTextCount();
     }
@@ -53,7 +53,7 @@ class KeyEventManager {
      */
     keyDown(e) {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
-            this.textController.delete();
+            this.textController.execDelete();
         }
         this.uiController.updateTextCount();
     }
