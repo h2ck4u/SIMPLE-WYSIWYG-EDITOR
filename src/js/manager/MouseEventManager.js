@@ -1,6 +1,5 @@
 class MouseEventManager {
-    constructor(editorId, editor) {
-        this.editorId = editorId;
+    constructor(editor) {
         this.editor = editor;
         this.popup = editor.popup;
         this.textController = editor.textController;

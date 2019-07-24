@@ -16,13 +16,12 @@ class Editor {
     constructor(editorId, config) {
         this.editorId = editorId;
         this.config = config;
-
         this.selectionManager = new SelectionManager();
         this.textController = new TextController(this);
-        this.init(editorId);
+        this.init();
         this.uiController = new UIController(this);
         this.keyEventManager = new KeyEventManager(this);
-        this.mouseEventManager = new MouseEventManager(editorId, this);
+        this.mouseEventManager = new MouseEventManager(this);
 
         return this;
     }
@@ -34,7 +33,7 @@ class Editor {
     init() {
         this.$element = this.createElement();
 
-        this.popup = new Popup(this, this.editorId, BUTTONS);
+        this.popup = new Popup(this, BUTTONS);
         this.nav = new Nav(this, NAV_LABEL, this.config["MAX_TEXT_COUNT"]);
     }
 
