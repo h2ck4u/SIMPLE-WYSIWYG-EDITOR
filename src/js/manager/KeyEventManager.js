@@ -18,17 +18,17 @@ class KeyEventManager {
      */
     attachEvent() {
         const $editor = this.editor.getMainElement();
-        $editor.on('input', this.input.bind(this));
-        $editor.on('keydown', this.keyDown.bind(this));
-        $editor.on('keypress', this.keyPress.bind(this));
-        $editor.on('paste', this.paste.bind(this));
+        $editor.on('input', this.onInput.bind(this));
+        $editor.on('keydown', this.onKeyDown.bind(this));
+        $editor.on('keypress', this.onKeyPress.bind(this));
+        $editor.on('paste', this.onPaste.bind(this));
     }
 
     /**
      * input이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    input(e) {
+    onInput(e) {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
             this.textController.execDelete();
         }
@@ -39,7 +39,7 @@ class KeyEventManager {
      * keyPress이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    keyPress(e) {
+    onKeyPress(e) {
         if (util.countText(this.editor.getMainElement()) >= this.maxTextCount) {
             e.preventDefault();
             e.stopPropagation();
@@ -51,7 +51,7 @@ class KeyEventManager {
      * keyDown이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    keyDown(e) {
+    onKeyDown(e) {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
             this.textController.execDelete();
         }
@@ -62,7 +62,7 @@ class KeyEventManager {
      * paste이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    paste(e) {
+    onPaste(e) {
         const pasteData = this.getPasteData(e);
         const pasteAble = this.chekcPasteable(pasteData);
 
