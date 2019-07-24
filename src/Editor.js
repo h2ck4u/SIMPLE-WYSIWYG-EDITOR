@@ -43,13 +43,13 @@ class Editor {
      * @returns {jQuery} Editor
      */
     createElement() {
-        const $editor = $(`#${this.editorId}`);
+        const $editorRoot = $(`#${this.editorId}`);
         const $container = $($(`<div class="comment-container"></div>`));
-        const $editableDiv = $(`<div class="editor-main" contenteditable="true"></div>`);
-        $container.append($editableDiv);
-        $editor.append($container);
+        const $editor = $(`<div class="editor-main" contenteditable="true"></div>`);
+        $container.append($editor);
+        $editorRoot.append($container);
 
-        return $editor;
+        return $editorRoot;
     }
 
     /**
