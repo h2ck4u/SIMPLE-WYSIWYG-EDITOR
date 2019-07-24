@@ -13,11 +13,10 @@ const {
 class KeyEventManager {
     constructor(editor) {
         this.editor = editor;
-        this.selectionManager = editor.selectionManager;
+        this.textController = editor.textController;
+        this.uiController = editor.uiController;
         this.maxTextCount = editor.config["MAX_TEXT_COUNT"];
         this.writeable = true;
-
-        this.nav = editor.nav;
         this.attachEvent();
     }
 
@@ -38,9 +37,9 @@ class KeyEventManager {
      */
     input(e) {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
-            command[COMMAND_NAME.DELETE]();
+            this.textController.delete();
         }
-        this.updateTextCount();
+        this.uiController.updateTextCount();
     }
 
     /**
@@ -52,7 +51,7 @@ class KeyEventManager {
             e.preventDefault();
             e.stopPropagation();
         }
-        this.updateTextCount();
+        this.uiController.updateTextCount();
     }
 
     /**
@@ -61,9 +60,9 @@ class KeyEventManager {
      */
     keyDown(e) {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
-            command[COMMAND_NAME.DELETE]();
+            this.textController.delete();
         }
-        this.updateTextCount();
+        this.uiController.updateTextCount();
     }
 
     /**
@@ -71,23 +70,32 @@ class KeyEventManager {
      * @param {Event} e 
      */
     paste(e) {
-        let text = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
-        if (util.countText(this.editor.getMainElement()) + text.length > this.maxTextCount) {
-            alert(MESSAGE_PASTE_TEXT_EXCEEDED.KO);
-            return false;
-        }
+        const pasteData = this.getPasteData(e);
+        const pasteAble = this.chekcPasteable(pasteData);
 
-        this.selectionManager.insertNode(text);
+        if (pasteAble) {
+            this.textController.insertTextNode(pasteData);
+        } else {
+            this.uiController.showAlert(MESSAGE_PASTE_TEXT_EXCEEDED.KO);
+        }
 
         e.stopPropagation();
         e.preventDefault();
     }
 
     /**
-     * 현재 입력된 글자수를 업데이트 합니다.
+     * clipboardData를 꺼내옵니다.
      */
-    updateTextCount() {
-        this.nav.updateTextCount();
+    getPasteData(e) {
+        return (e.originalEvent.clipboardData || window.clipboardData).getData('text');
+    }
+
+    /**
+     * 붙여넣기가 가능한지 판단합니다.
+     * 불가능 할 경우에 alsert을 uiController를 통해 띄웁니다.
+     */
+    chekcPasteable(pasteData) {
+        return util.countText(this.editor.getMainElement()) + pasteData.length < this.maxTextCount;
     }
 }
 

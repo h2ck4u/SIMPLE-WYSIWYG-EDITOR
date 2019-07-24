@@ -1,12 +1,10 @@
-import $ from 'jquery';
-import command from '../command/command';
-
 class MouseEventManager {
     constructor(editorId, editor) {
         this.editorId = editorId;
         this.editor = editor;
         this.popup = editor.popup;
-        this.selectionManager = editor.selectionManager;
+        this.textController = editor.textController;
+        this.uiController = editor.uiController;
 
         this.attachEvent();
     }
@@ -27,10 +25,7 @@ class MouseEventManager {
      */
     mouseDownOnEditor($editor) {
         $editor.on('mousedown', () => {
-            const isCollpased = this.selectionManager.isCollapsed();
-            if (isCollpased) {
-                this.popup.hide();
-            }
+            this.uiController.togglePopup();
         });
     }
 
@@ -40,12 +35,7 @@ class MouseEventManager {
     mouseUpOnEditor($editor) {
         $editor.on('mouseup', () => {
             setTimeout(() => {
-                const isCollpased = this.selectionManager.isCollapsed();
-                if (isCollpased) {
-                    this.popup.hide();
-                } else {
-                    this.popup.show();
-                }
+                this.uiController.togglePopup();
             }, 0);
         });
     }
@@ -61,8 +51,8 @@ class MouseEventManager {
                 if (!!buttonName) {
                     e.preventDefault();
                     e.stopPropagation();
-                    command[buttonName]();
-                    button.setActive();
+                    this.textController.execCommand(buttonName);
+                    this.uiController.setButtonActive(button);
                 }
             });
         });
