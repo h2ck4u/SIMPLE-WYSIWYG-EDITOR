@@ -1,11 +1,9 @@
 import $ from 'jquery';
 import Button from './Button';
-import util from '../util';
 
 class Popup {
-    constructor(editor, editorId, buttons) {
+    constructor(editor, buttons) {
         this.editor = editor;
-        this.editorId = editorId;
         this.selectionManager = editor.selectionManager;
         this.buttons = [];
         this.$element = this.createElement(buttons);
