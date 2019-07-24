@@ -31,21 +31,21 @@ const util = {
     },
 
     /**
-     * 현재 셀렉션의 모든 노드들의 스타일을 머지하여 계산합니다.
+     * 현재 셀렉션의 노드들의 공통된 스타일을 계산합니다.
      * @returns {Object} style
      */
-    mergeStyle: function (editorId) {
+    getCommonStyle: function () {
         const sel = window.getSelection();
         const range = sel.getRangeAt(0);
         const clonedContents = range.cloneContents().childNodes;
         const $anchorNode = $(sel.anchorNode);
         const $focusNode = $(sel.focusNode);
 
-        const $anchorParents = $anchorNode.parentsUntil(`#${editorId} .editor-main`);
-        const $focusParents = $focusNode.parentsUntil(`#${editorId} .editor-main`);
+        const $anchorParents = $anchorNode.parentsUntil(`.editor-main`);
+        const $focusParents = $focusNode.parentsUntil(`.editor-main`);
 
-        const anchorStyle = this.getStyle($anchorParents);
-        const focusStyle = this.getStyle($focusParents);
+        const anchorStyle = this.getMergedStyle($anchorParents);
+        const focusStyle = this.getMergedStyle($focusParents);
 
         const currStyle = {
             bold: anchorStyle.bold && focusStyle.bold,
@@ -82,7 +82,7 @@ const util = {
      * node들을 순회하면서 스타일을 계산합니다.
      * @param {Array} nodes 
      */
-    getStyle: function (nodes) {
+    getMergedStyle: function (nodes) {
         let [bold, italic, underline, strikethrough] = [false, false, false, false];
         for (let i = 0; i < nodes.length; i++) {
             let nodeName = nodes[i].nodeName;

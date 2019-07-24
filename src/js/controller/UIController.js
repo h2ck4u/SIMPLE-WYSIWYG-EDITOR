@@ -1,3 +1,5 @@
+import util from '../util';
+
 class UIController {
     constructor(editor) {
         this.editor = editor;
@@ -14,16 +16,41 @@ class UIController {
         if (isCollpased) {
             this.popup.hide();
         } else {
+            const position = util.getPopupPosition(this.selectionManager.getRange());
+            this.setPopupPosition(position);
+            this.setCommonStyle();
             this.popup.show();
         }
+    }
+
+    /**
+     * popup의 위치를 셋팅합니다.
+     * @param {Object} position
+     */
+    setPopupPosition(position) {
+        this.popup.$element.css({
+            top: position.top,
+            left: position.left
+        });
+    }
+
+    /**
+     * 현재 셀렉션의 공통된 스타일을 버튼에 적용합니다.
+     */
+    setCommonStyle() {
+        const style = util.getCommonStyle();
+        this.popup.buttons.forEach(button => {
+            let buttonName = button.name;
+            this.setButtonActive(button, style[buttonName]);
+        });
     }
 
     /**
      * button의 상태를 토글합니다.
      * @param {Button} button 
      */
-    setButtonActive(button) {
-        button.setActive();
+    setButtonActive(button, isActive = undefined) {
+        button.setActive(isActive);
     }
 
     /**
