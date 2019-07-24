@@ -2,26 +2,7 @@ import assert from 'assert';
 import Label from '../../../src/js/ui/Label';
 
 describe('Label.spec.js test', () => {
-    before(() => {
-        const { JSDOM } = require('jsdom');
-        const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
-        const { window } = jsdom;
-        const $ = global.jQuery = require('jquery')(window);
-        global.$ = $;
-    });
-
-    it('constructor', () => {
-        const data = {
-            name: 'textLabel',
-            text: 'testText'
-        }
-        const label = new Label(data);
-
-        assert.strictEqual(label.name, 'textLabel');
-        assert.strictEqual(label.text, 'testText');
-    });
-
-    it('getElement', () => {
+    it('getElement test', () => {
         const data = {
             name: 'textLabel',
             text: 'testText'
@@ -32,15 +13,9 @@ describe('Label.spec.js test', () => {
 
     });
 
-    it('updateText', () => {
-        const data = {
-            name: 'textLabel',
-            text: 'testText'
-        }
-        const label = new Label(data);
-        assert.strictEqual(label.text, 'testText');
+    it('updateText test', () => {
+        const label = new Label({});
         label.updateText('text');
-        assert.strictEqual(label.text, 'text');
         assert.strictEqual(label.$element.text(), 'text');
     });
 });
