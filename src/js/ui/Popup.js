@@ -30,29 +30,9 @@ class Popup {
     }
 
     /**
-     * popup의 위치를 셋팅합니다.
-     * @param {Number} top 
-     * @param {Number} left 
-     */
-    setPosition(top, left) {
-        this.$element.css({
-            top: top,
-            left: left
-        });
-    }
-
-    /**
      * popup을 보여줍니다.
      */
     show() {
-        const position = util.getPopupPosition(this.selectionManager.getRange());
-
-        this.setPosition(position.top, position.left);
-        const style = util.mergeStyle(this.editorId);
-        this.buttons.forEach(button => {
-            let buttonName = button.name;
-            button.setActive(style[buttonName]);
-        });
         this.$element.removeClass('hide');
     }
 

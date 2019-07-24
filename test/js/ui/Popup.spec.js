@@ -31,16 +31,7 @@ describe('Popup.spec.js test', () => {
                 actionName: 'strikeThrough'
             }
         ]
-        const popup = new Popup(editor, editorId, data);
-
-        assert.strictEqual(editorId, popup.editorId);
+        const popup = new Popup(editor, data);
         assert.strictEqual(data.length, popup.buttons.length);
-    });
-
-    it('setPosition test', () => {
-        const popup = new Popup(editor, editorId, []);
-        popup.setPosition(100, 100);
-        assert.equal('100px', popup.$element.css('top'));
-        assert.equal('100px', popup.$element.css('left'));
     });
 });
