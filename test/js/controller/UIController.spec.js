@@ -29,4 +29,11 @@ describe('UIController.spec.js test', () => {
         const label = editor.uiController.nav.findLabel('currCount');
         assert.equal(5, label.getElement().text());
     });
+
+    it('setPosition test', () => {
+        editor.uiController.setPopupPosition({ top: 100, left: 100 });
+        assert.equal('100px', editor.uiController.popup.$element.css('top'));
+        assert.equal('100px', editor.uiController.popup.$element.css('left'));
+    });
+
 });
