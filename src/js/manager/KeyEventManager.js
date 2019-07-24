@@ -1,15 +1,8 @@
-import $ from 'jquery';
 import util from '../util';
 import messages from '../messages';
-import command from '../command/command';
-import cnst from '../cnst';
-
 const {
     MESSAGE_PASTE_TEXT_EXCEEDED,
 } = messages;
-const {
-    COMMAND_NAME
-} = cnst;
 class KeyEventManager {
     constructor(editor) {
         this.editor = editor;
