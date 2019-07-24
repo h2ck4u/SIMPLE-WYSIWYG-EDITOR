@@ -9,8 +9,7 @@ describe('Label.spec.js test', () => {
         }
         const label = new Label(data);
         const expected = `<label name="${data.name}">${data.text}</label>`;
-        assert.strictEqual(expected, label.$element.get(0).outerHTML);
-
+        assert.strictEqual(expected, label.getElement().get(0).outerHTML);
     });
 
     it('updateText test', () => {
