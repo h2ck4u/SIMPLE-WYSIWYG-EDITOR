@@ -11,7 +11,7 @@ class UIController {
     /**
      * 현재 셀렉션 상태를 확인하여 Popup을 토글합니다.
      */
-    togglePopup() {
+    togglePopup = () => {
         const isCollpased = this.selectionManager.isCollapsed();
         if (isCollpased) {
             this.popup.hide();
@@ -27,7 +27,7 @@ class UIController {
      * popup의 위치를 셋팅합니다.
      * @param {Object} position
      */
-    setPopupPosition(position) {
+    setPopupPosition = (position) => {
         this.popup.$element.css({
             top: position.top,
             left: position.left
@@ -37,7 +37,7 @@ class UIController {
     /**
      * 현재 셀렉션의 공통된 스타일을 버튼에 적용합니다.
      */
-    setCommonStyle() {
+    setCommonStyle = () => {
         const style = util.getCommonStyle();
         this.popup.buttons.forEach(button => {
             let buttonName = button.name;
@@ -49,14 +49,14 @@ class UIController {
      * button의 상태를 토글합니다.
      * @param {Button} button 
      */
-    setButtonActive(button, isActive = undefined) {
+    setButtonActive = (button, isActive = undefined) => {
         button.setActive(isActive);
     }
 
     /**
      * Label의 글자수를 업데이트합니다.
      */
-    updateTextCount() {
+    updateTextCount = () => {
         this.nav.updateTextCount();
     }
 
@@ -64,7 +64,7 @@ class UIController {
      * 메세지 알럿을 띄웁니다.
      * @param {String} message 
      */
-    showAlert(message) {
+    showAlert = (message) => {
         alert(message);
     }
 }
