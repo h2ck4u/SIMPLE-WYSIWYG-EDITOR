@@ -30,7 +30,7 @@ class Editor {
      * 에디터 Element를 초기화합니다. 
      * 팝업,네비바를 DOM에 생성하여 append합니다.
      */
-    init() {
+    init = () => {
         this.$element = this.createElement();
 
         this.popup = new Popup(this, BUTTONS);
@@ -41,7 +41,7 @@ class Editor {
      * Editor Element를 생성합니다.
      * @returns {jQuery} Editor
      */
-    createElement() {
+    createElement = () => {
         const $editorRoot = $(`#${this.editorId}`);
         const $container = $($(`<div class="comment-container"></div>`));
         const $editor = $(`<div class="editor-main" contenteditable="true"></div>`);
@@ -55,7 +55,7 @@ class Editor {
      * Editor Element를 반환합니다.
      * @returns {jQuery} Editor
      */
-    getElement() {
+    getElement = () => {
         return this.$element;
     }
 
@@ -63,7 +63,7 @@ class Editor {
      * comment-container Element를 반환합니다.
      * @returns {jQuery} comment-container
      */
-    getContainerElement() {
+    getContainerElement = () => {
         return this.$element.find('.comment-container');
     }
 
@@ -71,7 +71,7 @@ class Editor {
      * editor-main Element를 반환합니다.
      * @returns {jQuery} editor-main
      */
-    getMainElement() {
+    getMainElement = () => {
         return this.$element.find('.editor-main');
     }
 }

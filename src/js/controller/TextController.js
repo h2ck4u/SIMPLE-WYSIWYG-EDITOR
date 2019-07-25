@@ -8,7 +8,7 @@ class TextController {
      * commandName에 따른 DOM API를 호출합니다.
      * @param {String} commandName 
      */
-    execCommand(commandName) {
+    execCommand = (commandName) => {
         switch (commandName) {
             case 'bold':
                 this.execBold();
@@ -28,35 +28,35 @@ class TextController {
     /**
      * bold command를 수행합니다.
      */
-    execBold() {
+    execBold = () => {
         document.execCommand('bold');
     }
 
     /**
      * italic command를 수행합니다.
      */
-    execItalic() {
+    execItalic = () => {
         document.execCommand('italic');
     }
 
     /**
      * strikeThrough command를 수행합니다.
      */
-    execStrike() {
+    execStrike = () => {
         document.execCommand('strikeThrough');
     }
 
     /**
      * underline command를 수행합니다.
      */
-    execUnderline() {
+    execUnderline = () => {
         document.execCommand('underline');
     }
 
     /**
      * delete command를 수행합니다.
      */
-    execDelete() {
+    execDelete = () => {
         document.execCommand('delete');
     }
 
@@ -64,7 +64,7 @@ class TextController {
      * 현재 셀렉션에 포함된 노드를 지우고, 인자로받은 Text로 만든 Node를 삽입하고 셀렉션을 보정합니다.
      * @param {String} text 
      */
-    insertTextNode(text) {
+    insertTextNode = (text) => {
         const sel = this.selectionManager.getSelection();
         if (!sel.rangeCount) {
             return false;

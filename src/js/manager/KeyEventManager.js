@@ -16,19 +16,19 @@ class KeyEventManager {
     /**
      * 이벤트매니저를 초기화 합니다.
      */
-    attachEvent() {
+    attachEvent = () => {
         const $editor = this.editor.getMainElement();
-        $editor.on('input', this.onInput.bind(this));
-        $editor.on('keydown', this.onKeyDown.bind(this));
-        $editor.on('keypress', this.onKeyPress.bind(this));
-        $editor.on('paste', this.onPaste.bind(this));
+        $editor.on('input', this.onInput);
+        $editor.on('keydown', this.onKeyDown);
+        $editor.on('keypress', this.onKeyPress);
+        $editor.on('paste', this.onPaste);
     }
 
     /**
      * input이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    onInput(e) {
+    onInput = (e) => {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
             this.textController.execDelete();
         }
@@ -39,7 +39,7 @@ class KeyEventManager {
      * keyPress이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    onKeyPress(e) {
+    onKeyPress = (e) => {
         if (util.countText(this.editor.getMainElement()) >= this.maxTextCount) {
             e.preventDefault();
             e.stopPropagation();
@@ -51,7 +51,7 @@ class KeyEventManager {
      * keyDown이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    onKeyDown(e) {
+    onKeyDown = (e) => {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
             this.textController.execDelete();
         }
@@ -62,7 +62,7 @@ class KeyEventManager {
      * paste이벤트를 컨트롤 합니다.
      * @param {Event} e 
      */
-    onPaste(e) {
+    onPaste = (e) => {
         const pasteData = this.getPasteData(e);
         const pasteAble = this.chekcPasteable(pasteData);
 
@@ -79,7 +79,7 @@ class KeyEventManager {
     /**
      * clipboardData를 꺼내옵니다.
      */
-    getPasteData(e) {
+    getPasteData = (e) => {
         return (e.originalEvent.clipboardData || window.clipboardData).getData('text');
     }
 
