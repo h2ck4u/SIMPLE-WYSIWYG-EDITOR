@@ -1,10 +1,4 @@
 import $ from 'jquery';
-import cnst from './cnst';
-
-const {
-    DEFAULT_POPUP_MARGIN_BOTTOM,
-    DEFAULT_POPUP_WIDTH
-} = cnst;
 
 const util = {
     /**
@@ -12,11 +6,11 @@ const util = {
      * @param {Range} range
      * @returns {Object} popupPosition
      */
-    getPopupPosition: function (range) {
+    getPopupPosition: function (range, option) {
         const boundingRect = range.getClientRects()[0];
         return {
-            top: boundingRect.top - DEFAULT_POPUP_MARGIN_BOTTOM,
-            left: boundingRect.left + boundingRect.width / 2 - DEFAULT_POPUP_WIDTH / 2
+            top: boundingRect.top - option.marginBottom,
+            left: boundingRect.left + boundingRect.width / 2 - option.popupWidth / 2
         };
     },
 
