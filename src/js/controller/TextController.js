@@ -6,10 +6,10 @@ class TextController {
 
     /**
      * commandName에 따른 DOM API를 호출합니다.
-     * @param {String} commandName 
+     * @param {Button} Button 
      */
-    execCommand = (commandName) => {
-        switch (commandName) {
+    execCommand = (Button) => {
+        switch (Button.name) {
             case 'bold':
                 this.execBold();
                 break;
@@ -22,6 +22,12 @@ class TextController {
             case 'underline':
                 this.execUnderline();
                 break;
+            default:
+                try {
+                    Button.event();
+                } catch (error) {
+                    console.error(error);
+                }
         }
     }
 

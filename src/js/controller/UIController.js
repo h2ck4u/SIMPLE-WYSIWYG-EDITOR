@@ -16,7 +16,12 @@ class UIController {
         if (isCollpased) {
             this.popup.hide();
         } else {
-            const position = util.getPopupPosition(this.selectionManager.getRange());
+            const popupWidth = parseInt(this.popup.$element.css('width'));
+            const marginBottom = this.editor.config["DEFAULT_POPUP_MARGIN_BOTTOM"];
+            const position = util.getPopupPosition(this.selectionManager.getRange(), {
+                popupWidth,
+                marginBottom
+            });
             this.setPopupPosition(position);
             this.setCommonStyle();
             this.popup.show();

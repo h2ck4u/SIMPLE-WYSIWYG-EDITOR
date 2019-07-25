@@ -33,7 +33,7 @@ class Editor {
     init = () => {
         this.$element = this.createElement();
 
-        this.popup = new Popup(this, BUTTONS);
+        this.popup = new Popup(this, this.config["BUTTONS"]);
         this.nav = new Nav(this, NAV_LABEL, this.config["MAX_TEXT_COUNT"]);
     }
 
