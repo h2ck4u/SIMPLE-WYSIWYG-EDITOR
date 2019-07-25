@@ -4,6 +4,7 @@ class Button {
     constructor(button) {
         this.name = button.name;
         this.label = button.label;
+        this.event = button.event;
         this.active = false;
         this.$element = this.createElement();
     }

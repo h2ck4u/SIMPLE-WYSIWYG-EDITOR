@@ -43,13 +43,10 @@ class MouseEventManager {
      * Button에 MouseDown 이벤트를 등록합니다.
      */
     onButtonMouseDown = (e) => {
-        const buttonName = e.target.getAttribute('name');
-        if (!!buttonName) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.textController.execCommand(buttonName);
-            this.uiController.setButtonActive(e.data);
-        }
+        e.preventDefault();
+        e.stopPropagation();
+        this.textController.execCommand(e.data);
+        this.uiController.setButtonActive(e.data);
     }
 
     /**
