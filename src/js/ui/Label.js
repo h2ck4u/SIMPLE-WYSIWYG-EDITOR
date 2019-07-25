@@ -11,7 +11,7 @@ class Label {
      * @param {String} text 
      * @returns {jQuery} buttonElement
      */
-    createElement(name, text) {
+    createElement = (name, text) => {
         const $element = $(`<label name="${name}">${text}</label>`);
         return $element;
     }
@@ -20,7 +20,7 @@ class Label {
      * Label Element를 반환합니다.
      * @returns {jQuery} buttonElement
      */
-    getElement() {
+    getElement = () => {
         return this.$element;
     }
 
@@ -28,7 +28,7 @@ class Label {
      * Label의 텍스트를 업데이트합니다.
      * @param {String} text 
      */
-    updateText(text) {
+    updateText = (text) => {
         this.$element.text(text);
     }
 }

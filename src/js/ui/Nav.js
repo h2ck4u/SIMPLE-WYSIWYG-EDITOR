@@ -14,7 +14,7 @@ class Nav {
      * Nav Element를 생성합니다.
      * @returns {jQuery} navElement
      */
-    createElement(labels) {
+    createElement = (labels) => {
         const $editor = this.editor.getContainerElement();
         const $element = $(`<div class="label"></div>`);
 
@@ -33,14 +33,14 @@ class Nav {
     /**
      * nav Element를 반환합니다.
      */
-    getElement() {
+    getElement = () => {
         return this.$element;
     }
 
     /**
      * 현재 글자수를 나타내는 currCount Label의 텍스트를 업데이트합니다.
      */
-    updateTextCount() {
+    updateTextCount = () => {
         const currCountLabel = this.findLabel('currCount');
         currCountLabel.updateText(util.countText(this.editor.getMainElement()));
     }

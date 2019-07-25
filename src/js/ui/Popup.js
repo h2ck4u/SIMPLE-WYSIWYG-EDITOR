@@ -14,7 +14,7 @@ class Popup {
      * @param {Array} buttons 
      * @returns {jQuery} popupElement
      */
-    createElement(buttons) {
+    createElement = (buttons) => {
         const $editor = this.editor.getContainerElement();
         const $element = $(`<div class="popup hide"></div>`);
 
@@ -32,14 +32,14 @@ class Popup {
     /**
      * popup을 보여줍니다.
      */
-    show() {
+    show = () => {
         this.$element.removeClass('hide');
     }
 
     /**
      * popup을 숨깁니다.
      */
-    hide() {
+    hide = () => {
         if (!this.$element.hasClass('hide')) {
             this.$element.addClass('hide');
         }
