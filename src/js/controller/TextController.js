@@ -67,17 +67,20 @@ class TextController {
     }
 
     /**
-     * 현재 셀렉션에 포함된 노드를 지우고, 인자로받은 Text로 만든 Node를 삽입하고 셀렉션을 보정합니다.
-     * @param {String} text 
-     */
-    insertTextNode = (text) => {
+    * 현재 셀렉션에 포함된 노드를 지우고, 인자로받은 data로 만든 Node를 삽입하고 셀렉션을 보정합니다.
+    * @param {String} data 
+    */
+    insertHTMLNode = (data) => {
         const sel = this.selectionManager.getSelection();
         if (!sel.rangeCount) {
             return false;
         }
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = data;
         sel.deleteFromDocument();
-        sel.getRangeAt(0).insertNode(document.createTextNode(text));
+        sel.getRangeAt(0).insertNode(tempDiv);
         sel.collapseToEnd();
+        tempDiv.scrollIntoView();
     }
 }
 

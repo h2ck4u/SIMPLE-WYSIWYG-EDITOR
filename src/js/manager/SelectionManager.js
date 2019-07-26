@@ -21,6 +21,14 @@ class SelectionManager {
     getRange = () => {
         return this.getSelection().getRangeAt(0);
     }
+
+    /**
+     * 현재 셀렉션의 Range를 추가합니다.
+     */
+    addRange = (range) => {
+        const sel = this.getSelection();
+        sel.addRange(range);
+    }
 }
 
 export default SelectionManager;
