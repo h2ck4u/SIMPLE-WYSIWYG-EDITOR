@@ -26,8 +26,6 @@ class KeyEventManager {
      */
     onInput = (e) => {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
-            e.preventDefault();
-            e.stopPropagation();
             this.textController.execDelete();
         }
         this.uiController.updateTextCount();
@@ -51,8 +49,6 @@ class KeyEventManager {
      */
     onKeyDown = (e) => {
         if (util.countText(this.editor.getMainElement()) > this.maxTextCount) {
-            e.preventDefault();
-            e.stopPropagation();
             this.textController.execDelete();
         }
         this.uiController.updateTextCount();
