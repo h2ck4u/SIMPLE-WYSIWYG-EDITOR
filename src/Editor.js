@@ -6,6 +6,7 @@ import UIController from './js/controller/UIController';
 import KeyEventManager from './js/manager/KeyEventManager';
 import SelectionManager from './js/manager/SelectionManager';
 import MouseEventManager from './js/manager/MouseEventManager';
+import ClipboardManager from './js/manager/ClipboardManager';
 
 import cnst from './js/cnst';
 const {
@@ -22,6 +23,7 @@ class Editor {
         this.uiController = new UIController(this);
         this.keyEventManager = new KeyEventManager(this);
         this.mouseEventManager = new MouseEventManager(this);
+        this.clipboardManager = new ClipboardManager(this);
 
         return this;
     }
