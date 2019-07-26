@@ -9,7 +9,7 @@ class MouseEventManager {
     }
 
     /**
-     * 에디터에 필요한 이벤트들을 등록합니다.
+     * MouseEventManager에 필요한 이벤트들을 등록합니다.
      */
     attachEvent = () => {
         const $editor = this.editor.getElement();
