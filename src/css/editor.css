@@ -13,7 +13,6 @@
 }
 
 .comment-container .popup {
-    width: 85px;
     height: 25px;
     border: solid 0.5px gray;
     background: white;
@@ -37,4 +36,14 @@
     border: solid 0.5px gray;
     border-top: none;
     box-sizing: border-box;
+}
+
+.comment-container #clipboard {
+    float: left;
+    width: 200px;
+    height: 100px;
+    border: solid 1px orange;
+    position: fixed;
+    top: 0px;
+    left: -99999px;
 }

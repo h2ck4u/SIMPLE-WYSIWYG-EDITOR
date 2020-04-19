@@ -1,12 +1,10 @@
+import $ from 'jquery';
 import Button from './Button';
-import util from '../util';
-
 
 class Popup {
-    constructor(editorId, buttons) {
-        this.editorId = editorId;
-        this.top = 0;
-        this.left = 0;
+    constructor(editor, buttons) {
+        this.editor = editor;
+        this.selectionManager = editor.selectionManager;
         this.buttons = [];
         this.$element = this.createElement(buttons);
     }
@@ -16,8 +14,8 @@ class Popup {
      * @param {Array} buttons 
      * @returns {jQuery} popupElement
      */
-    createElement(buttons) {
-        const $editor = $(`#${this.editorId} .comment-container`);
+    createElement = (buttons) => {
+        const $editor = this.editor.getContainerElement();
         const $element = $(`<div class="popup hide"></div>`);
 
         buttons.forEach(button => {
@@ -32,36 +30,16 @@ class Popup {
     }
 
     /**
-     * popup의 위치를 셋팅합니다.
-     * @param {Number} top 
-     * @param {Number} left 
-     */
-    setPosition(top, left) {
-        this.$element.css({
-            top: top,
-            left: left
-        });
-    }
-
-    /**
      * popup을 보여줍니다.
      */
-    show() {
-        const position = util.getPopupPosition();
-
-        this.setPosition(position.top, position.left);
-        const style = util.mergeStyle(this.editorId);
-        this.buttons.forEach(button => {
-            let buttonName = button.name;
-            button.setStatus(style[buttonName]);
-        });
+    show = () => {
         this.$element.removeClass('hide');
     }
 
     /**
      * popup을 숨깁니다.
      */
-    hide() {
+    hide = () => {
         if (!this.$element.hasClass('hide')) {
             this.$element.addClass('hide');
         }

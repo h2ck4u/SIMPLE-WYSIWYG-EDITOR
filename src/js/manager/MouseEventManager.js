@@ -1,84 +1,59 @@
-import command from '../command/command';
-
 class MouseEventManager {
-    constructor(editorId, editor) {
-        this.editorId = editorId;
+    constructor(editor) {
         this.editor = editor;
         this.popup = editor.popup;
-        this.SelectionManager = editor.SelectionManager;
+        this.textController = editor.textController;
+        this.uiController = editor.uiController;
 
         this.attachEvent();
     }
 
     /**
-     * 에디터에 필요한 이벤트들을 등록합니다.
+     * MouseEventManager에 필요한 이벤트들을 등록합니다.
      */
-    attachEvent() {
-        this.mouseDownOnEditor();
-        this.mouseUpOnEditor();
-        this.mouseDownOnButton();
-        this.mouseUpOnButton();
+    attachEvent = () => {
+        const $editor = this.editor.getElement();
+        $editor.on('mousedown', this.onEditorMouseDown);
+        $editor.on('mouseup', this.onEditorMouseUp);
+
+        this.popup.buttons.forEach(button => {
+            let $button = button.getElement();
+            $button.on('mousedown', button, this.onButtonMouseDown);
+            $button.on('mouseup', this.onButtonMouseUp);
+        });
     }
 
     /**
      * Editor에 MouseDown 이벤트를 등록합니다.
      */
-    mouseDownOnEditor() {
-        const $editor = $(`#${this.editorId}`);
-        $editor.on('mousedown', () => {
-            const isCollpased = this.SelectionManager.isCollapsed();
-            if (isCollpased) {
-                this.popup.hide();
-            }
-        });
+    onEditorMouseDown = () => {
+        this.uiController.togglePopup();
     }
 
     /**
      * Editor에 MouseUp 이벤트를 등록합니다.
      */
-    mouseUpOnEditor() {
-        const $editor = $(`#${this.editorId}`);
-        $editor.on('mouseup', () => {
-            setTimeout(() => {
-                const isCollpased = this.SelectionManager.isCollapsed();
-                if (isCollpased) {
-                    this.popup.hide();
-                } else {
-                    this.popup.show();
-                }
-            }, 0);
-        });
+    onEditorMouseUp = () => {
+        setTimeout(() => {
+            this.uiController.togglePopup();
+        }, 0);
     }
 
     /**
      * Button에 MouseDown 이벤트를 등록합니다.
      */
-    mouseDownOnButton() {
-        this.popup.buttons.forEach(button => {
-            let $button = button.getElement();
-            $button.on('mousedown', (e) => {
-                e.stopPropagation();
-                const buttonName = e.target.getAttribute('name');
-                if (!!buttonName) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    command[buttonName]();
-                    button.toggelStatus();
-                }
-            });
-        });
+    onButtonMouseDown = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.textController.execCommand(e.data);
+        this.uiController.setButtonActive(e.data);
     }
 
     /**
      * Button에 MouseUp 이벤트를 등록합니다.
      */
-    mouseUpOnButton() {
-        this.popup.buttons.forEach(button => {
-            let $button = button.getElement();
-            $button.on('mouseup', (e) => {
-                e.stopPropagation();
-            });
-        });
+    onButtonMouseUp = (e) => {
+        e.stopPropagation();
     }
 }
 

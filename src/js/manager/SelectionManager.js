@@ -1,13 +1,34 @@
 class SelectionManager {
-    constructor() {}
+    constructor() { }
 
     /**
      * 셀렉션이 isCollapsed인지 확인합니다.
      */
-    isCollapsed() {
+    isCollapsed = () => {
         return window.getSelection().isCollapsed;
     }
 
+    /**
+     * 현재 셀렉션을 반환합니다.
+     */
+    getSelection = () => {
+        return window.getSelection();
+    }
+
+    /**
+     * 현재 셀렉션의 Range를 반환합니다.
+     */
+    getRange = () => {
+        return this.getSelection().getRangeAt(0);
+    }
+
+    /**
+     * 현재 셀렉션의 Range를 추가합니다.
+     */
+    addRange = (range) => {
+        const sel = this.getSelection();
+        sel.addRange(range);
+    }
 }
 
 export default SelectionManager;

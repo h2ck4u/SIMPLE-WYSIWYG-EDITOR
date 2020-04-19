@@ -1,51 +1,45 @@
-import cnst from './cnst';
-
-const {
-    DEFAULT_POPUP_MARGIN_BOTTOM,
-    DEFAULT_POPUP_WIDTH
-} = cnst;
+import $ from 'jquery';
 
 const util = {
     /**
      * 현재 셀렉션을 계산하여 popup이 보여야할 위치를 반환합니다.
+     * @param {Range} range
      * @returns {Object} popupPosition
      */
-    getPopupPosition: function () {
-        const sel = window.getSelection();
-        const range = sel.getRangeAt(0);
+    getPopupPosition: function (range, option) {
         const boundingRect = range.getClientRects()[0];
         return {
-            top: boundingRect.top - DEFAULT_POPUP_MARGIN_BOTTOM,
-            left: boundingRect.left + boundingRect.width / 2 - DEFAULT_POPUP_WIDTH / 2
+            top: boundingRect.top - option.marginBottom,
+            left: boundingRect.left + boundingRect.width / 2 - option.popupWidth / 2
         };
     },
 
     /**
+     * @param {jQuery} $editorMain 
      * 에디터 영역내의 텍스트갯수를 셉니다. 엔터는 1글자로 처리합니다.
      */
-    countText: function (editorId) {
-        const elEditor = $(`#${editorId} .editor-main`);
-        const children = elEditor.children();
+    countText: function ($editorMain) {
+        const children = $editorMain.children();
         const newLine = children.length === 0 ? 0 : children.length - 1;
-        return newLine + elEditor.text().length;
+        return newLine + $editorMain.text().length;
     },
 
     /**
-     * 현재 셀렉션의 모든 노드들의 스타일을 머지하여 계산합니다.
+     * 현재 셀렉션의 노드들의 공통된 스타일을 계산합니다.
      * @returns {Object} style
      */
-    mergeStyle: function (editorId) {
+    getCommonStyle: function () {
         const sel = window.getSelection();
         const range = sel.getRangeAt(0);
         const clonedContents = range.cloneContents().childNodes;
         const $anchorNode = $(sel.anchorNode);
         const $focusNode = $(sel.focusNode);
 
-        const $anchorParents = $anchorNode.parentsUntil(`#${editorId} .editor-main`);
-        const $focusParents = $focusNode.parentsUntil(`#${editorId} .editor-main`);
+        const $anchorParents = $anchorNode.parentsUntil(`.editor-main`);
+        const $focusParents = $focusNode.parentsUntil(`.editor-main`);
 
-        const anchorStyle = this.getStyle($anchorParents);
-        const focusStyle = this.getStyle($focusParents);
+        const anchorStyle = this.getMergedStyle($anchorParents);
+        const focusStyle = this.getMergedStyle($focusParents);
 
         const currStyle = {
             bold: anchorStyle.bold && focusStyle.bold,
@@ -82,7 +76,7 @@ const util = {
      * node들을 순회하면서 스타일을 계산합니다.
      * @param {Array} nodes 
      */
-    getStyle: function (nodes) {
+    getMergedStyle: function (nodes) {
         let [bold, italic, underline, strikethrough] = [false, false, false, false];
         for (let i = 0; i < nodes.length; i++) {
             let nodeName = nodes[i].nodeName;

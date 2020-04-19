@@ -1,8 +1,10 @@
+import $ from 'jquery';
 import Label from './Label';
+import util from '../util';
 
 class Nav {
-    constructor(editorId, labels, maxTextCount) {
-        this.editorId = editorId;
+    constructor(editor, labels, maxTextCount) {
+        this.editor = editor;
         this.labels = [];
         this.maxTextCount = maxTextCount
         this.$element = this.createElement(labels);
@@ -12,8 +14,8 @@ class Nav {
      * Nav Element를 생성합니다.
      * @returns {jQuery} navElement
      */
-    createElement(labels) {
-        const $editor = $(`#${this.editorId} .comment-container`);
+    createElement = (labels) => {
+        const $editor = this.editor.getContainerElement();
         const $element = $(`<div class="label"></div>`);
 
         labels.forEach(label => {
@@ -31,8 +33,16 @@ class Nav {
     /**
      * nav Element를 반환합니다.
      */
-    getElement() {
+    getElement = () => {
         return this.$element;
+    }
+
+    /**
+     * 현재 글자수를 나타내는 currCount Label의 텍스트를 업데이트합니다.
+     */
+    updateTextCount = () => {
+        const currCountLabel = this.findLabel('currCount');
+        currCountLabel.updateText(util.countText(this.editor.getMainElement()));
     }
 
     /**
@@ -41,7 +51,7 @@ class Nav {
      */
     findLabel(name) {
         for (let i = 0; i < this.labels.length - 1; i++) {
-            if (this.labels[i].name === name) {
+            if (this.labels[i].getElement().attr('name') === name) {
                 return this.labels[i];
             }
         }
