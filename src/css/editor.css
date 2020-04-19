@@ -1,0 +1,40 @@
+.comment-container .editor-main {
+    width: 400px;
+    height: 200px;
+    padding: 25px;
+    border: solid 1px gray;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}
+
+.comment-container .hide {
+    display: none;
+}
+
+.comment-container .popup {
+    width: 85px;
+    height: 25px;
+    border: solid 0.5px gray;
+    background: white;
+    position: absolute;
+}
+
+.comment-container i {
+    font-size: 16px;
+    padding: 2px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.comment-container i.active {
+    background: #00c73c;
+}
+
+.comment-container .label {
+    width: 400px;
+    height: 20px;
+    border: solid 0.5px gray;
+    border-top: none;
+    box-sizing: border-box;
+}
