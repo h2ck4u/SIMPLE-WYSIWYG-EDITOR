@@ -1,10 +1,10 @@
-import Nav from './js/ui/Nav';
-import Popup from './js/ui/Popup';
-import KeyEventManager from './js/manager/KeyEventManager';
-import SelectionManager from './js/manager/SelectionManager';
-import MouseEventManager from './js/manager/MouseEventManager';
+import Nav from './editor/ui/Nav';
+import Popup from './editor/ui/Popup';
+import KeyEventManager from './editor/manager/KeyEventManager';
+import SelectionManager from './editor/manager/SelectionManager';
+import MouseEventManager from './editor/manager/MouseEventManager';
 
-import cnst from './js/cnst';
+import cnst from './editor/cnst';
 const {
     BUTTONS, NAV_LABEL
 } = cnst;
