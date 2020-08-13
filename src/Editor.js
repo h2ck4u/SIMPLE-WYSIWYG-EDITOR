@@ -1,10 +1,10 @@
-import Nav from './js/ui/Nav';
-import Popup from './js/ui/Popup';
-import KeyEventManager from './js/manager/KeyEventManager';
-import SelectionManager from './js/manager/SelectionManager';
-import MouseEventManager from './js/manager/MouseEventManager';
+import Nav from './wysiwyg/ui/Nav';
+import Popup from './wysiwyg/ui/Popup';
+import KeyEventManager from './wysiwyg/manager/KeyEventManager';
+import SelectionManager from './wysiwyg/manager/SelectionManager';
+import MouseEventManager from './wysiwyg/manager/MouseEventManager';
 
-import cnst from './js/cnst';
+import cnst from './wysiwyg/cnst';
 const {
     BUTTONS, NAV_LABEL
 } = cnst;

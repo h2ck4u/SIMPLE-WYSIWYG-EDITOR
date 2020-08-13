@@ -1,4 +1,7 @@
-node_modules
-*.pptx
-dist
-package-lock.json
+node_modules/
+*~
+npm-debug.log
+coverage/
+.DS_Store
+.idea/
+*.iml
